@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Clientes</title>
+    <title>Cadastro de Produtos com Validação</title>
 </head>
 <body>
     <form action="" method="post">
-        <label for="nome">Nome:</label>
+        <label for="nome">Nome do produto:</label>
         <input type="text" name="nome" required> <br>
 
-        <label for="email">Email:</label>
-        <input type="email" name="email" required> <br>
+        <label for="preco">Preço:</label>
+        <input type="number" min="0.01" step="0.01" name="preco" required> <br>
 
-        <button type="submit">Cadastrar</button>
+        <button type="submit">Adicionar</button>
     </form>
 
     <?php
@@ -21,7 +21,7 @@
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Recebe os valores enviados pelo formulário 
             $nome = $_POST['nome'];
-            $email = $_POST['email'];
+            $preco = $_POST['preco'];
 
             // Conexão com o banco de dados
             $servername = "127.0.0.1";
@@ -37,10 +37,10 @@
             }
 
             //Insere o registro no banco de dados
-            $sql = "INSERT INTO clientes (nome, email) VALUES ('$nome','$email')";
+            $sql = "INSERT INTO  produtos  (nome, preco) VALUES ('$nome','$preco')";
 
             if ($conn->query($sql) === TRUE){
-                echo "<p style= 'color:Darkgreen;'> Cliente cadastrado com sucesso</p>";
+                echo "<p style= 'color:Darkgreen;'> Produto adicionado com sucesso</p>";
             } else {
                 echo "<p style= 'color:Red;'> Erro ao cadastrar.</p>";
             }
